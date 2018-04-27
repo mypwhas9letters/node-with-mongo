@@ -8,13 +8,17 @@ MongoClient.connect("mongodb://localhost:27017/TodoApp", (err, client) => {
   const db = client.db('TodoApp')
 
 
-  db.collection("Users").find({name: "Jake"}).toArray().then((docs) => {
-
-    console.log(JSON.stringify(docs))
-  }, (err) => {
-    console.log(err)
+  db.collection("Users").findOneAndUpdate({
+    _id: new ObjectID("5ae2373552c336145fb09905")
+  },{
+    $inc: {
+      age: 2
+    }
+  },{
+    returnOriginal: false
+  }).then((result) => {
+    console.log(result)
   })
-
 
 
   // client.close()
